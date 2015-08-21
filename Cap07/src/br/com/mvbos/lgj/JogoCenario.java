@@ -79,7 +79,6 @@ public class JogoCenario extends CenarioPadrao {
 		pizza = new Pizza();
 		pizza.setVel(4);
 		pizza.setAtivo(true);
-		pizza.setCor(Color.YELLOW);
 		pizza.setDirecao(Direcao.OESTE);
 
 		// Inimigos

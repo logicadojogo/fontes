@@ -37,7 +37,6 @@ public class InicioCenario extends CenarioPadrao {
 		Util.centraliza(menuJogo, largura, altura);
 		Util.centraliza(menuVelInicial, largura, altura);
 
-		menuJogo.setPy(menuJogo.getPy() + menuJogo.getAltura());
 		menuVelInicial.setPy(menuJogo.getPy() + menuJogo.getAltura());
 
 		menuJogo.setAtivo(true);

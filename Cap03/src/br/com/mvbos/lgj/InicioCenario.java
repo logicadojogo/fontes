@@ -32,7 +32,7 @@ public class InicioCenario extends CenarioPadrao {
 		Util.centraliza(menuModo, largura, altura);
 		Util.centraliza(menuVeloc, largura, altura);
 
-		menuModo.setPy(menuModo.getPy() + menuModo.getAltura());
+		menuModo.setPy(menuModo.getPy() + 20);
 		menuVeloc.setPy(menuModo.getPy() + menuModo.getAltura());
 
 		bola.setAtivo(true);

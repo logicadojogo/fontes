@@ -28,6 +28,7 @@ public class Menu extends Texto {
 
 		g.setColor(getCor());
 		super.desenha(g, getRotulo() + ": <" + opcoes[idx] + ">", getPx(), getPy() + getAltura());
+		//super.desenha(g, String.format("%s: <%s>", getRotulo(), opcoes[idx]), getPx(), getPy() + getAltura());
 
 		if (selecionado)
 			g.drawLine(getPx(), getPy() + getAltura() + 5, getPx() + getLargura(), getPy() + getAltura() + 5);

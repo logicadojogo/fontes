@@ -42,8 +42,7 @@ public class Animacao extends Elemento {
 		int largImg = largMoldura * coluna;
 		int altImg = getImagem().getIconHeight();
 
-		g.drawImage(getImagem().getImage(), getPx(), getPy(), getPx() + largMoldura, getPy() + altImg, largImg, 0, largImg
-				+ largMoldura, altImg, null);
+		g.drawImage(getImagem().getImage(), getPx(), getPy(), getPx() + largMoldura, getPy() + altImg, largImg, 0, largImg + largMoldura, altImg, null);
 	}
 
 	@Override

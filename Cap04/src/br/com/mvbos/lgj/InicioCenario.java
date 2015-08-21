@@ -28,7 +28,7 @@ public class InicioCenario extends CenarioPadrao {
 		}
 		
 		opcoes[opcoes.length - 1] = "Do Russo";
-		
+
 		menuJogo.addOpcoes(opcoes);
 
 		menuVelInicial = new Menu("Vel.");

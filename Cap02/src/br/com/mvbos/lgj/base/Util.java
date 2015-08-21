@@ -11,7 +11,7 @@ public class Util {
 		final int paA = a.getPy() + a.getAltura();
 		final int paB = b.getPy() + b.getAltura();
 
-		if (plA >= b.getPx() && a.getPx() <= plB && paA >= b.getPy() && a.getPy() <= paB) {
+		if (plA > b.getPx() && a.getPx() < plB && paA > b.getPy() && a.getPy() < paB) {
 			return true;
 		}
 

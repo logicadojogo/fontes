@@ -28,11 +28,11 @@ public class JogoCenarioDoRusso extends CenarioPadrao {
 	private Elemento[] rastros;
 
 	private int blocoPorTela;
-	
+
 	private int temporizador = 0;
 
 	private int contadorRastro = 5;
-	
+
 	private Texto texto = new Texto();
 
 	private Random rand = new Random();
@@ -42,7 +42,7 @@ public class JogoCenarioDoRusso extends CenarioPadrao {
 	public JogoCenarioDoRusso(int largura, int altura) {
 		super(largura, altura);
 	}
-	
+
 	@Override
 	public void carregar() {
 		blocoPorTela = (largura / _LARG) * (altura / _LARG) - 1;
@@ -165,7 +165,8 @@ public class JogoCenarioDoRusso extends CenarioPadrao {
 			temporizador += serpente.getVel();
 
 		if (estado == Estado.JOGANDO && blocoPorTela - contadorRastro > 0) {
-			while (!adicionaProximaFruta());
+			while (!adicionaProximaFruta())
+				;
 		}
 
 	}
@@ -223,7 +224,7 @@ public class JogoCenarioDoRusso extends CenarioPadrao {
 				texto.desenha(g, "Ganhou!", 180, 180);
 			else
 				texto.desenha(g, "Vixe!", 180, 180);
-			
+
 		} else if (Jogo.pausado)
 			Jogo.textoPausa.desenha(g, "PAUSA", largura / 2 - Jogo.textoPausa.getFonte().getSize(), altura / 2);
 	}

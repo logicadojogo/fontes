@@ -40,24 +40,23 @@ public class Pizza extends Elemento {
 			coluna = 0;
 	}
 
-@Override
-public void desenha(Graphics2D g) {
+	@Override
+	public void desenha(Graphics2D g) {
 
-	int pX = getPx() - 6;
-	int pY = getPy() + JogoCenario.ESPACO_TOPO - 6;
+		int pX = getPx() - 6;
+		int pY = getPy() + JogoCenario.ESPACO_TOPO - 6;
 
-	// Largura e altura da moldura
-	int largMoldura = getImagem().getIconWidth() / 4;
-	int altMoldura = getImagem().getIconHeight() / 4;
+		// Largura e altura da moldura
+		int largMoldura = getImagem().getIconWidth() / 4;
+		int altMoldura = getImagem().getIconHeight() / 4;
 
-	// Largura e altura do recorte da imagem
-	int largImg = largMoldura * coluna;
-	int altImg = altMoldura * linha;
+		// Largura e altura do recorte da imagem
+		int largImg = largMoldura * coluna;
+		int altImg = altMoldura * linha;
 
-	g.drawImage(getImagem().getImage(), pX, pY, pX + largMoldura, pY + altMoldura, largImg, altImg, largImg + largMoldura,
-			altImg + altMoldura, null);
+		g.drawImage(getImagem().getImage(), pX, pY, pX + largMoldura, pY + altMoldura, largImg, altImg, largImg + largMoldura, altImg + altMoldura, null);
 
-}
+	}
 
 	public Direcao getDirecao() {
 		return direcao;

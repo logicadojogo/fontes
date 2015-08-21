@@ -285,8 +285,7 @@ public class Jogo extends JFrame {
 							if (!tiros[0].isAtivo() && inv.getPx() < tanque.getPx()) {
 								addTiroInimigo(inv, tiros[0]);
 
-							} else if (!tiros[1].isAtivo() && inv.getPx() > tanque.getPx()
-									&& inv.getPx() < tanque.getPx() + tanque.getLargura()) {
+							} else if (!tiros[1].isAtivo() && inv.getPx() > tanque.getPx() && inv.getPx() < tanque.getPx() + tanque.getLargura()) {
 								addTiroInimigo(inv, tiros[1]);
 
 							} else if (!tiros[2].isAtivo() && inv.getPx() > tanque.getPx()) {

@@ -236,38 +236,38 @@ public class JogoCenario extends CenarioPadrao {
 
 	}
 
-@Override
-public void desenhar(Graphics2D g) {
+	@Override
+	public void desenhar(Graphics2D g) {
 
-	if (fruta.isAtivo()) {
-		fruta.desenha(g);
+		if (fruta.isAtivo()) {
+			fruta.desenha(g);
+		}
+
+		for (Elemento e : nivel) {
+			if (e == null)
+				break;
+
+			e.desenha(g);
+		}
+
+		for (int i = 0; i < contadorRastro; i++) {
+			rastros[i].desenha(g);
+		}
+
+		serpente.desenha(g);
+
+		texto.desenha(g, String.valueOf(rastros.length - contadorRastro), largura - 35, altura);
+
+		if (estado != Estado.JOGANDO) {
+
+			if (estado == Estado.GANHOU)
+				texto.desenha(g, "Ganhou!", 180, 180);
+			else
+				texto.desenha(g, "Vixe!", 180, 180);
+		}
+
+		if (Jogo.pausado)
+			Jogo.textoPausa.desenha(g, "PAUSA", largura / 2 - Jogo.textoPausa.getFonte().getSize(), altura / 2);
 	}
-
-	for(Elemento e : nivel){
-		if(e == null)
-			break;
-		
-		e.desenha(g);
-	}
-
-	for (int i = 0; i < contadorRastro; i++) {
-		rastros[i].desenha(g);
-	}
-
-	serpente.desenha(g);
-
-	texto.desenha(g, String.valueOf(rastros.length - contadorRastro), largura - 35, altura);
-
-	if (estado != Estado.JOGANDO) {
-
-		if (estado == Estado.GANHOU)
-			texto.desenha(g, "Ganhou!", 180, 180);
-		else
-			texto.desenha(g, "Vixe!", 180, 180);
-	}
-
-	if (Jogo.pausado)
-		Jogo.textoPausa.desenha(g, "PAUSA", largura / 2 - Jogo.textoPausa.getFonte().getSize(), altura / 2);
-}
 
 }

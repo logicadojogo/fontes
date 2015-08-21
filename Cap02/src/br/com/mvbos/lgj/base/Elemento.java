@@ -13,7 +13,8 @@ public class Elemento {
 	private boolean ativo;
 	private Color cor;
 
-	public Elemento() {	}
+	public Elemento() {
+	}
 
 	public Elemento(int px, int py, int largura, int altura) {
 		this.px = px;
@@ -22,42 +23,75 @@ public class Elemento {
 		this.altura = altura;
 	}
 
-	public void atualiza() { }
-
-	public void desenha(Graphics2D g) {	
-		g.drawRect(px, py, largura, altura); 
+	public void atualiza() {
 	}
 
-	public int getLargura() {	return largura; }
+	public void desenha(Graphics2D g) {
+		g.drawRect(px, py, largura, altura);
+	}
 
-	public void setLargura(int largura) {	this.largura = largura; }
+	public int getLargura() {
+		return largura;
+	}
 
-	public int getAltura() { return altura; }
+	public void setLargura(int largura) {
+		this.largura = largura;
+	}
 
-	public void setAltura(int altura) { this.altura = altura; }
+	public int getAltura() {
+		return altura;
+	}
 
-	public int getPx() { return px; }
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
 
-	public void setPx(int px) { this.px = px; }
+	public int getPx() {
+		return px;
+	}
 
-	public int getPy() { return py; }
+	public void setPx(int px) {
+		this.px = px;
+	}
 
-	public void setPy(int py) { this.py = py; }
+	public int getPy() {
+		return py;
+	}
 
-	public int getVel() { return vel; }
+	public void setPy(int py) {
+		this.py = py;
+	}
 
-	public void setVel(int vel) { this.vel = vel;	 }
+	public int getVel() {
+		return vel;
+	}
 
-	public boolean isAtivo() { return ativo; }
+	public void setVel(int vel) {
+		this.vel = vel;
+	}
 
-	public void setAtivo(boolean ativo) { this.ativo = ativo; }
+	public boolean isAtivo() {
+		return ativo;
+	}
 
-	public Color getCor() { return cor; }
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
 
-	public void setCor(Color cor) { this.cor = cor; }
+	public Color getCor() {
+		return cor;
+	}
 
-	public void incPx(int x) { px = px + x; }
+	public void setCor(Color cor) {
+		this.cor = cor;
+	}
 
-	public void incPy(int y) { py = py + y; }
+	public void incPx(int x) {
+		px = px + x;
+	}
+
+	public void incPy(int y) {
+		py = py + y;
+	}
 
 }

@@ -87,7 +87,7 @@ public class JogoCenario extends CenarioPadrao {
 			clipAdicionarPeca = AudioSystem.getClip();
 			clipAdicionarPeca.open(as);
 
-			as = AudioSystem.getAudioInputStream(new File("som/109662__grunz__success.wav"));
+			as = AudioSystem.getAudioInputStream(new File("som/109662_grunz_success.wav"));
 			clipMarcarLinha = AudioSystem.getClip();
 			clipMarcarLinha.open(as);
 

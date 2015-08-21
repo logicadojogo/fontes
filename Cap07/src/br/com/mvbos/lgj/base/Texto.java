@@ -22,7 +22,7 @@ public class Texto extends Elemento {
 	public void desenha(Graphics2D g, String texto, int px, int py) {
 		if (getCor() != null)
 			g.setColor(getCor());
-		
+
 		g.setFont(fonte);
 		g.drawString(texto, px, py);
 	}

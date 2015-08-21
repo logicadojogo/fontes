@@ -613,8 +613,7 @@ public class JogoCenario extends CenarioPadrao {
 
 					} else if (valor == Nivel.SC) {
 						g.setColor(Color.WHITE);
-						g.fillRect(col * largEl + espLinha / 2, lin * largEl + espLinha / 2 + ESPACO_TOPO, largEl - espLinha,
-								largEl - espLinha);
+						g.fillRect(col * largEl + espLinha / 2, lin * largEl + espLinha / 2 + ESPACO_TOPO, largEl - espLinha, largEl - espLinha);
 
 					} else if (valor == Nivel.LN) {
 						g.setColor(Color.WHITE);

@@ -61,7 +61,7 @@ public class JogoCenario extends CenarioPadrao {
 	private int pontoVoltaLin;
 
 	private boolean superPizza;
-	
+
 	private int pausaColisao;
 	private boolean trocarCenario;
 
@@ -220,13 +220,13 @@ public class JogoCenario extends CenarioPadrao {
 		if (estado == Estado.PERDEU) {
 			return;
 		}
-		
-		if(pausaColisao > 0){
+
+		if (pausaColisao > 0) {
 			pausaColisao--;
 			return;
 		}
-		
-		if(trocarCenario){
+
+		if (trocarCenario) {
 			carregar();
 			reiniciar();
 			trocarCenario = false;
@@ -270,7 +270,7 @@ public class JogoCenario extends CenarioPadrao {
 			if (Util.colide(pizza, el)) {
 
 				if (el.getModo() == Legume.Modo.CACANDO) {
-					//reiniciar();
+					reiniciar();
 				} else if (el.getModo() == Legume.Modo.FUGINDO) {
 					el.setAtivo(false);
 					el.setModo(Legume.Modo.FANTASMA);
@@ -314,8 +314,7 @@ public class JogoCenario extends CenarioPadrao {
 
 		// Validar linha branca
 		if (el instanceof Legume) {
-			if (grade[lin][col] == Nivel.LN || grade[lin][colLarg] == Nivel.LN || grade[linAlt][col] == Nivel.LN
-					|| grade[linAlt][colLarg] == Nivel.LN) {
+			if (grade[lin][col] == Nivel.LN || grade[lin][colLarg] == Nivel.LN || grade[linAlt][col] == Nivel.LN || grade[linAlt][colLarg] == Nivel.LN) {
 
 				if (el.isAtivo() || ((Legume) el).getModo() == Modo.PRESO)
 					return false;
@@ -324,8 +323,7 @@ public class JogoCenario extends CenarioPadrao {
 			}
 		}
 
-		if (grade[lin][col] >= Nivel.BL || grade[lin][colLarg] >= Nivel.BL || grade[linAlt][col] >= Nivel.BL
-				|| grade[linAlt][colLarg] >= Nivel.BL) {
+		if (grade[lin][col] >= Nivel.BL || grade[lin][colLarg] >= Nivel.BL || grade[linAlt][col] >= Nivel.BL || grade[linAlt][colLarg] >= Nivel.BL) {
 
 			return false;
 		}
@@ -595,11 +593,11 @@ public class JogoCenario extends CenarioPadrao {
 			pontos += grade[lin][col] == Nivel.CN ? 5 : 25;
 			totalPastilha--;
 
-			if (totalPastilha == 0){
+			if (totalPastilha == 0) {
 				pausaColisao = 15;
 				trocarCenario = true;
 				estado = JogoCenario.Estado.GANHOU;
-				
+
 			} else if (grade[lin][col] == Nivel.SC)
 				superPizza(true);
 
@@ -675,8 +673,7 @@ public class JogoCenario extends CenarioPadrao {
 					int largImg = largMoldura * coluna;
 					int altImg = altMoldura * linha;
 
-					g.drawImage(cenario.getImage(), pX, pY, pX + largMoldura, pY + altMoldura, largImg, altImg, largImg
-							+ largMoldura, altImg + altMoldura, null);
+					g.drawImage(cenario.getImage(), pX, pY, pX + largMoldura, pY + altMoldura, largImg, altImg, largImg + largMoldura, altImg + altMoldura, null);
 
 				} else {
 					if (valor == Nivel.CN)

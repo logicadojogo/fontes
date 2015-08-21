@@ -59,26 +59,26 @@ public class Legume extends Elemento {
 			linha = 0;
 	}
 
-@Override
-public void desenha(Graphics2D g) {
-	int pX = getPx() - 6;
-	int pY = getPy() + JogoCenario.ESPACO_TOPO - 6;
+	@Override
+	public void desenha(Graphics2D g) {
+		int pX = getPx() - 6;
+		int pY = getPy() + JogoCenario.ESPACO_TOPO - 6;
 
-	int largMoldura = sprite.getIconWidth() / 4;
-	int altMoldura = sprite.getIconHeight() / 2;
+		int largMoldura = sprite.getIconWidth() / 4;
+		int altMoldura = sprite.getIconHeight() / 2;
 
-	int largImg = largMoldura * coluna;
-	int altImg = altMoldura * linha;
+		int largImg = largMoldura * coluna;
+		int altImg = altMoldura * linha;
 
-	if (modo != Modo.FANTASMA)
-		g.drawImage(sprite.getImage(), pX, pY, pX + largMoldura, pY + altMoldura, largImg, altImg, largImg + largMoldura, altImg + altMoldura, null);
+		if (modo != Modo.FANTASMA)
+			g.drawImage(sprite.getImage(), pX, pY, pX + largMoldura, pY + altMoldura, largImg, altImg, largImg + largMoldura, altImg + altMoldura, null);
 
-	largMoldura = olhos.getIconWidth();
-	altMoldura = olhos.getIconHeight() / 4;
-	altImg = altMoldura * lnOlhos;
+		largMoldura = olhos.getIconWidth();
+		altMoldura = olhos.getIconHeight() / 4;
+		altImg = altMoldura * lnOlhos;
 
-	g.drawImage(olhos.getImage(), pX, pY, pX + largMoldura, pY + altMoldura, 0, altImg, largMoldura, altImg + altMoldura, null);
-}
+		g.drawImage(olhos.getImage(), pX, pY, pX + largMoldura, pY + altMoldura, 0, altImg, largMoldura, altImg + altMoldura, null);
+	}
 
 	public Direcao getDirecao() {
 		return direcao;

@@ -26,7 +26,7 @@ public class JogoCenario extends CenarioPadrao {
 
 	private Direcao prxDirecao = Direcao.OESTE;
 
-	private int temporizadorPizza = 0;
+	private int temporizadorPizza;
 	private int temporizadorFantasma;
 
 	private Pizza pizza;

@@ -81,6 +81,7 @@ public class JogoCenario extends CenarioPadrao {
 		navJogUm = new Nave();
 		navJogUm.setAtivo(true);
 		navJogUm.setImagem(Recursos.getImagem(Recursos.Imagem.JOGADOR_A));
+
 		navJogDois = new Nave();
 		navJogDois.setAtivo(Jogo.numeroJogadores > 0);
 		navJogDois.setImagem(Recursos.getImagem(Recursos.Imagem.JOGADOR_B));
@@ -147,6 +148,13 @@ public class JogoCenario extends CenarioPadrao {
 						ast.setAtivo(false);
 
 					tiro.getNave().somaPontos(ast.getPonto());
+
+					short pontos = tiro.getNave().getPontos();
+					if (navJogUm == tiro.getNave() && pontos > Jogo.jogadorPontos[0])
+						Jogo.jogadorPontos[0] = pontos;
+					else if (navJogDois == tiro.getNave() && pontos > Jogo.jogadorPontos[1])
+						Jogo.jogadorPontos[1] = tiro.getNave().getPontos();
+
 					break;
 				}
 			}
@@ -190,8 +198,22 @@ public class JogoCenario extends CenarioPadrao {
 			if (Util.saiu(tiro, largura, altura, 20)) {
 				tiro.setAtivo(false);
 				tiro.getNave().errou();
-			} else
+			} else {
 				tiro.atualiza();
+
+				if (navJogUm != tiro.getNave() && Util.colide(tiro, navJogUm)) {
+					tiro.setAtivo(false);
+					navJogUm.danos();
+					navJogUm.setAngulo(MatUtil.corrigeGraus(navJogUm.getAngulo() + 90));
+
+				} else if (navJogDois != tiro.getNave() && Util.colide(tiro, navJogDois)) {
+					tiro.setAtivo(false);
+					navJogDois.danos();
+					navJogDois.setAngulo(MatUtil.corrigeGraus(navJogDois.getAngulo() - 90));
+
+				}
+			}
+
 		}
 
 	}
@@ -320,8 +342,12 @@ public class JogoCenario extends CenarioPadrao {
 
 		g.drawImage(fundo.getImage(), 0, 0, null);
 
-		texto.desenha(g, "Tupã | " + navJogUm.getPontos(), 10, 20);
-		texto.desenha(g, "Îasy | " + navJogDois.getPontos(), largura - 120, 20);
+		// texto.desenha(g, "Tupã | " + navJogUm.getPontos(), 10, 20);
+		// texto.desenha(g, "Îasy | " + navJogDois.getPontos(), largura - 120,
+		// 20);
+
+		texto.desenha(g, String.format("Tupã | %04d", navJogUm.getPontos()), 10, 20);
+		texto.desenha(g, String.format("Îasy | %04d", navJogDois.getPontos()), largura - 120, 20);
 
 		if (navJogUm.getSeguidos() > 2)
 			texto.desenha(g, "x" + navJogUm.getSeguidos(), 10, 40);

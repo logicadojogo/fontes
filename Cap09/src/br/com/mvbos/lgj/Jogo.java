@@ -30,6 +30,8 @@ public class Jogo extends JFrame {
 		CIMA, BAIXO, ESQUERDA, DIREITA, BA, BB, BC, MOUSE_A, MOUSE_B
 	}
 
+	public static short[] jogadorPontos = new short[2];
+
 	private static final int FRAMES = 20;
 
 	private static final int FPS = Math.round(1000 / (FRAMES + 1.5f));

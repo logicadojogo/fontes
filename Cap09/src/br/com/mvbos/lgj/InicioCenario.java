@@ -1,5 +1,6 @@
 package br.com.mvbos.lgj;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Random;
 
@@ -7,6 +8,7 @@ import javax.swing.ImageIcon;
 
 import br.com.mvbos.lgj.base.CenarioPadrao;
 import br.com.mvbos.lgj.base.Menu;
+import br.com.mvbos.lgj.base.Texto;
 import br.com.mvbos.lgj.base.Util;
 
 public class InicioCenario extends CenarioPadrao {
@@ -14,6 +16,9 @@ public class InicioCenario extends CenarioPadrao {
 	private ImageIcon fundo;
 	private Random rand = new Random();
 	private Asteroide[] aerolitos = new Asteroide[10];
+
+	private int novaPy;
+	private Texto texto = new Texto();
 
 	public InicioCenario(int largura, int altura) {
 		super(largura, altura);
@@ -58,6 +63,10 @@ public class InicioCenario extends CenarioPadrao {
 	@Override
 	public void atualizar() {
 
+		novaPy++;
+		if (novaPy + 100 > altura)
+			novaPy = -100;
+
 		for (Asteroide a : aerolitos) {
 			a.atualiza();
 			Util.corrigePosicao(a, largura, altura);
@@ -79,6 +88,10 @@ public class InicioCenario extends CenarioPadrao {
 		for (Asteroide a : aerolitos) {
 			a.desenha(g);
 		}
+
+		g.setColor(Color.WHITE);
+		texto.desenha(g, String.format("Tupã | %04d", Jogo.jogadorPontos[0]), largura / 4, novaPy);
+		texto.desenha(g, String.format("Îasy | %04d", Jogo.jogadorPontos[1]), largura / 2 + 100, novaPy);
 
 		menuJogo.desenha(g);
 	}

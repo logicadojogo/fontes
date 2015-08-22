@@ -94,7 +94,7 @@ public class JogoCenario extends CenarioPadrao {
 		nave.setAngulo(graus);
 
 		if (Jogo.controleTecla[Jogo.Tecla.BC.ordinal()]) {
-			adicionarTiro(nave.getAngulo());
+			adicionarTiro(nave.getAngulo(), TipoTiro.TRIPLO);
 			Jogo.liberaTecla(Jogo.Tecla.BC);
 		}
 
@@ -148,19 +148,52 @@ public class JogoCenario extends CenarioPadrao {
 
 	}
 
-	private void adicionarTiro(float angulo) {
+	enum TipoTiro {
+		COMUM, DUPLO, TRIPLO
+	}
+
+	private void proximoTiro() {
 		if (contadorTiro > 1)
 			contadorTiro--;
 		else
 			contadorTiro = tiros.length - 1;
+	}
 
-		Tiro t = tiros[contadorTiro];
+	private void adicionarTiro(float angulo, TipoTiro tipo) {
 
-		t.setAngulo(angulo);
-		t.setPx(nave.getPx() + nave.getLargura() / 2 - t.getLargura() / 2);
-		t.setPy(nave.getPy() + nave.getAltura() / 2 - t.getAltura() / 2);
+		if (TipoTiro.COMUM == tipo || TipoTiro.TRIPLO == tipo) {
 
-		t.setAtivo(true);
+			proximoTiro();
+
+			Tiro t = tiros[contadorTiro];
+
+			t.setAngulo(angulo);
+			t.setPx(nave.getPx() + nave.getLargura() / 2 - t.getLargura() / 2);
+			t.setPy(nave.getPy() + nave.getAltura() / 2 - t.getAltura() / 2);
+
+			t.setAtivo(true);
+
+		}
+
+		if (TipoTiro.DUPLO == tipo || TipoTiro.TRIPLO == tipo) {
+			proximoTiro();
+			Tiro tiroA = tiros[contadorTiro];
+
+			proximoTiro();
+			Tiro tiroB = tiros[contadorTiro];
+
+			tiroA.setAngulo(angulo - 10);
+			tiroA.setPx(nave.getPx() + nave.getLargura() / 2 - tiroA.getLargura() / 2);
+			tiroA.setPy(nave.getPy() + nave.getAltura() / 2 - tiroA.getAltura() / 2);
+
+			tiroB.setAngulo(angulo + 10);
+			tiroB.setPx(nave.getPx() + nave.getLargura() / 2 - tiroB.getLargura() / 2);
+			tiroB.setPy(nave.getPy() + nave.getAltura() / 2 - tiroB.getAltura() / 2);
+
+			tiroA.setAtivo(true);
+			tiroB.setAtivo(true);
+
+		}
 	}
 
 	private void maisAerolitos() {

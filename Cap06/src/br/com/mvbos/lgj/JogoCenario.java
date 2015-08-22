@@ -41,10 +41,6 @@ public class JogoCenario extends CenarioPadrao {
 
 	private Estado estado = Estado.JOGANDO;
 
-	public JogoCenario(int largura, int altura) {
-		super(largura, altura);
-	}
-
 	private ImageIcon fundo;
 
 	private int largEl;
@@ -63,6 +59,23 @@ public class JogoCenario extends CenarioPadrao {
 	private int pontoVoltaLin;
 
 	private boolean superPizza;
+
+	private Elemento fruta = new Elemento() {
+		@Override
+		public void desenha(Graphics2D g) {
+			if (!isAtivo())
+				return;
+
+			g.setColor(Color.RED);
+			g.fillOval(getPx() - 4, getPy() + JogoCenario.ESPACO_TOPO, getLargura() / 2, getAltura() / 2);
+			g.fillOval(getPx() + 4, getPy() + JogoCenario.ESPACO_TOPO, getLargura() / 2, getAltura() / 2);
+			g.fillOval(getPx(), getPy() + 5 + JogoCenario.ESPACO_TOPO, getLargura() / 2, getAltura() / 2);
+		}
+	};
+
+	public JogoCenario(int largura, int altura) {
+		super(largura, altura);
+	}
 
 	@Override
 	public void carregar() {
@@ -120,6 +133,12 @@ public class JogoCenario extends CenarioPadrao {
 				} else if (grade[lin][col] == Nivel.PV) {
 					pontoVoltaCol = col;
 					pontoVoltaLin = lin;
+
+				} else if (grade[lin][col] == Nivel.FT) {
+					fruta.setLargura(largEl);
+					fruta.setAltura(largEl);
+					fruta.setPx(converteInidicePosicao(col));
+					fruta.setPy(converteInidicePosicao(lin));
 				}
 			}
 		}
@@ -229,6 +248,15 @@ public class JogoCenario extends CenarioPadrao {
 				}
 			}
 		}
+
+		if (!fruta.isAtivo() && rand.nextInt(10) == 5) {
+			fruta.setAtivo(true);
+		}
+
+		if (Util.colide(pizza, fruta)) {
+			fruta.setAtivo(false);
+			pontos += 100;
+		}
 	}
 
 	private boolean validaDirecao(Direcao dir, Pizza el) {
@@ -264,16 +292,14 @@ public class JogoCenario extends CenarioPadrao {
 		if (foraDaGrade(col, lin) || foraDaGrade(colLarg, linAlt))
 			return true;
 
-		if (grade[lin][col] == Nivel.BL || grade[lin][colLarg] == Nivel.BL || grade[linAlt][col] == Nivel.BL
-				|| grade[linAlt][colLarg] == Nivel.BL) {
+		if (grade[lin][col] == Nivel.BL || grade[lin][colLarg] == Nivel.BL || grade[linAlt][col] == Nivel.BL || grade[linAlt][colLarg] == Nivel.BL) {
 
 			return false;
 		}
 
 		// Validar linha branca
 		if (el.isAtivo() || el.getModo() == Modo.PRESO) {
-			if (grade[lin][col] == Nivel.LN || grade[lin][colLarg] == Nivel.LN || grade[linAlt][col] == Nivel.LN
-					|| grade[linAlt][colLarg] == Nivel.LN) {
+			if (grade[lin][col] == Nivel.LN || grade[lin][colLarg] == Nivel.LN || grade[linAlt][col] == Nivel.LN || grade[linAlt][colLarg] == Nivel.LN) {
 				return false;
 			}
 		}
@@ -608,8 +634,7 @@ public class JogoCenario extends CenarioPadrao {
 
 					} else if (valor == Nivel.CN) {
 						g.setColor(Color.WHITE);
-						g.fillRect(col * largEl + espLinha, lin * largEl + espLinha + ESPACO_TOPO, largEl - espLinha * 2, largEl
-								- espLinha * 2);
+						g.fillRect(col * largEl + espLinha, lin * largEl + espLinha + ESPACO_TOPO, largEl - espLinha * 2, largEl - espLinha * 2);
 
 					} else if (valor == Nivel.SC) {
 						g.setColor(Color.WHITE);
@@ -624,7 +649,7 @@ public class JogoCenario extends CenarioPadrao {
 		}
 
 		texto.desenha(g, "Pontos: " + pontos, 10, 20);
-
+		fruta.desenha(g);
 		pizza.desenha(g);
 
 		for (Elemento el : inimigos) {

@@ -21,7 +21,10 @@ public class Nivel {
 	/** Ponto de Fuga */
 	public static final int PF = 8;
 	/** Ponto de Volta */
-	public static final int PV = 9; 
+	public static final int PV = 9;
+	
+	/** Fruta */
+	public static final int FT = 10;
 
 	public static int[][] cenario = {
 		{ BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL, BL },
@@ -41,7 +44,7 @@ public class Nivel {
 		{ CN, CN, CN, CN, CN, CN, CN, CN, CN, EV, BL, EV, EV, EV, EV, EV, EV, BL, EV, CN, CN, CN, CN, CN, CN, CN, CN, CN },
 		{ BL, BL, BL, BL, BL, BL, CN, BL, BL, EV, BL, EV, P2, PV, EV, EV, EV, BL, EV, BL, BL, CN, BL, BL, BL, BL, BL, BL },
 		{ EV, EV, EV, EV, EV, BL, CN, BL, BL, EV, BL, BL, BL, BL, BL, BL, BL, BL, EV, BL, BL, CN, BL, EV, EV, EV, EV, EV },
-		{ EV, EV, EV, EV, EV, BL, CN, BL, BL, EV, EV, EV, EV, PI, EV, EV, EV, EV, EV, BL, BL, CN, BL, EV, EV, EV, EV, EV },
+		{ EV, EV, EV, EV, EV, BL, CN, BL, BL, EV, EV, EV, EV, PI, FT, EV, EV, EV, EV, BL, BL, CN, BL, EV, EV, EV, EV, EV },
 		{ EV, EV, EV, EV, EV, BL, CN, BL, BL, CN, BL, BL, BL, BL, BL, BL, BL, BL, CN, BL, BL, CN, BL, EV, EV, EV, EV, EV },
 		{ BL, BL, BL, BL, BL, BL, CN, BL, BL, CN, BL, BL, BL, BL, BL, BL, BL, BL, CN, BL, BL, CN, BL, BL, BL, BL, BL, BL },
 		{ BL, CN, CN, CN, CN, CN, CN, CN, CN, CN, CN, CN, CN, BL, BL, CN, CN, CN, CN, CN, CN, CN, CN, CN, CN, CN, CN, BL },

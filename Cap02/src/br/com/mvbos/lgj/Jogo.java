@@ -144,7 +144,49 @@ public class Jogo extends JFrame {
 
 	private Random rand = new Random();
 
+	private Elemento[] nivel;
+
 	private void carregarJogo() {
+
+		int total = 0;
+		int _LARG = 10;
+
+		for (int i = 0; i < Nivel.niveis.length; i++) {
+			char[][] n = Nivel.niveis[i];
+
+			for (int linha = 0; linha < n.length; linha++) {
+				for (int coluna = 0; coluna < n[0].length; coluna++) {
+					if (n[linha][coluna] == '0')
+						total++;
+				}
+			}
+		}
+
+		nivel = new Elemento[total];
+
+		for (int i = 0; i < Nivel.niveis.length; i++) {
+			char[][] n = Nivel.niveis[i];
+
+			for (int linha = 0; linha < n.length; linha++) {
+				for (int coluna = 0; coluna < n[0].length; coluna++) {
+					if (n[linha][coluna] != ' ') {
+
+						Elemento e = new Elemento();
+						e.setAtivo(true);
+						e.setCor(Color.LIGHT_GRAY);
+
+						e.setPx(_LARG * coluna + 30 + (200 * i));
+						e.setPy(_LARG * linha + JANELA_ALTURA - 300);
+
+						e.setAltura(_LARG);
+						e.setLargura(_LARG);
+
+						nivel[--total] = e;
+					}
+				}
+			}
+
+		}
 
 		tanque = new Tanque();
 		tanque.setVel(3);
@@ -367,6 +409,21 @@ public class Jogo extends JFrame {
 						Invader e = invasores[i][j];
 						e.desenha(g2d);
 					}
+				}
+
+				for (Elemento e : nivel) {
+					if (!e.isAtivo())
+						continue;
+
+					for (int i = 0; i < tiros.length; i++) {
+						if (tiros[i].isAtivo() && Util.colide(tiros[i], e)) {
+							e.setAtivo(false);
+							tiros[i].setAtivo(false);
+						}
+					}
+
+					g2d.setColor(e.getCor());
+					e.desenha(g2d);
 				}
 
 				tanque.atualiza();

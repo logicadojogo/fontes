@@ -27,7 +27,7 @@ public class Elemento {
 	}
 
 	public void desenha(Graphics2D g) {
-		g.drawRect(px, py, largura, altura);
+		g.fillRect(px, py, largura, altura);
 	}
 
 	public int getLargura() {

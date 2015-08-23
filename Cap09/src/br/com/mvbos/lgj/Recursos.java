@@ -18,7 +18,7 @@ public class Recursos {
 		imagens[Imagem.JOGADOR_A.ordinal()] = new ImageIcon(DIR_IMG + "nave_jogador_1.png");
 		imagens[Imagem.JOGADOR_B.ordinal()] = new ImageIcon(DIR_IMG + "nave_jogador_2.png");
 		imagens[Imagem.TIRO_A.ordinal()] = new ImageIcon(DIR_IMG + "tiro.png");
-		imagens[Imagem.TIRO_B.ordinal()] = new ImageIcon(DIR_IMG + "tiro.png");
+		imagens[Imagem.TIRO_B.ordinal()] = new ImageIcon(DIR_IMG + "tiro_b.png");
 
 		imagens[Imagem.AST_A.ordinal()] = new ImageIcon(DIR_IMG + "asteroide_grande.png");
 		imagens[Imagem.AST_B.ordinal()] = new ImageIcon(DIR_IMG + "asteroide_medio.png");

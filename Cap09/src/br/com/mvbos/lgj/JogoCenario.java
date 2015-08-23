@@ -293,6 +293,11 @@ public class JogoCenario extends CenarioPadrao {
 
 		Util.centraliza(t, jogador);
 
+		if (navJogUm == jogador)
+			t.setImagem(Recursos.getImagem(Recursos.Imagem.TIRO_A));
+		else
+			t.setImagem(Recursos.getImagem(Recursos.Imagem.TIRO_B));
+
 		t.setAtivo(true);
 	}
 

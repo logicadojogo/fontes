@@ -13,7 +13,7 @@ import br.com.mvbos.lgj.base.Util;
 public class JogoCenario extends CenarioPadrao {
 
 	enum Estado {
-		JOGANDO, GANHOU, PERDEU
+		JOGANDO, GANHOU, PERDEU, INICIO_ANIMACAO, FIM_ANIMACAO
 	}
 
 	private static final int _LARG = 25;
@@ -26,7 +26,7 @@ public class JogoCenario extends CenarioPadrao {
 
 	private int temporizador = 0;
 
-	private int contadorRastro = RASTRO_INICIAL;
+	private int contadorRastro;
 
 	private Elemento fruta;
 
@@ -43,9 +43,15 @@ public class JogoCenario extends CenarioPadrao {
 	// Frutas para finalizar o level
 	private int dificuldade = 10;
 
-	private int contadorNivel = 0;
+	private int contadorNivel;
 
 	private Estado estado = Estado.JOGANDO;
+
+	// Animacao
+	private int duracaoAnimacao = 10;
+
+	private int iniAnimacao = 0;
+	private int fimAnimacao = Nivel.niveis[0].length + duracaoAnimacao;
 
 	public JogoCenario(int largura, int altura) {
 		super(largura, altura);
@@ -55,7 +61,9 @@ public class JogoCenario extends CenarioPadrao {
 	public void carregar() {
 
 		// define direcao inicial
-		dy = 1;
+		dx = -1;
+		contadorNivel = 0;
+		contadorRastro = RASTRO_INICIAL;
 		rastros = new Elemento[dificuldade + RASTRO_INICIAL];
 
 		fruta = new Elemento(0, 0, _LARG, _LARG);
@@ -66,18 +74,33 @@ public class JogoCenario extends CenarioPadrao {
 		serpente.setCor(Color.YELLOW);
 		serpente.setVel(Jogo.velocidade);
 
+		char[][] nivelSelecionado = Nivel.niveis[Jogo.nivel];
+
+		int total = 0;
+
+		for (int linha = 0; linha < nivelSelecionado.length; linha++) {
+			for (int coluna = 0; coluna < nivelSelecionado[0].length; coluna++) {
+				if (nivelSelecionado[linha][coluna] == '0') {
+					total++;
+
+				} else if (nivelSelecionado[linha][coluna] == '1') {
+					serpente.setPx(_LARG * coluna);
+					serpente.setPy(_LARG * linha);
+				}
+			}
+		}
+
 		for (int i = 0; i < rastros.length; i++) {
 			rastros[i] = new Elemento(serpente.getPx(), serpente.getPy(), _LARG, _LARG);
 			rastros[i].setCor(Color.GREEN);
 			rastros[i].setAtivo(true);
 		}
 
-		char[][] nivelSelecionado = Nivel.niveis[Jogo.nivel];
-		nivel = new Elemento[nivelSelecionado.length * 2];
+		nivel = new Elemento[total];
 
 		for (int linha = 0; linha < nivelSelecionado.length; linha++) {
-			for (int coluna = 1; coluna < nivelSelecionado[0].length; coluna++) {
-				if (nivelSelecionado[linha][coluna] != ' ') {
+			for (int coluna = 0; coluna < nivelSelecionado[0].length; coluna++) {
+				if (nivelSelecionado[linha][coluna] == '0') {
 
 					Elemento e = new Elemento();
 					e.setAtivo(true);
@@ -105,7 +128,29 @@ public class JogoCenario extends CenarioPadrao {
 	@Override
 	public void atualizar() {
 
-		if (estado != Estado.JOGANDO) {
+		if (estado == Estado.GANHOU || estado == Estado.PERDEU) {
+			return;
+		}
+
+		if (estado == Estado.INICIO_ANIMACAO || estado == Estado.FIM_ANIMACAO) {
+
+			if (estado == Estado.INICIO_ANIMACAO) {
+				iniAnimacao++;
+
+				if (iniAnimacao == fimAnimacao) {
+					descarregar();
+					carregar();
+					estado = Estado.FIM_ANIMACAO;
+				}
+
+			} else {
+				iniAnimacao--;
+
+				if (iniAnimacao == 0)
+					estado = Estado.JOGANDO;
+
+			}
+
 			return;
 		}
 
@@ -180,7 +225,14 @@ public class JogoCenario extends CenarioPadrao {
 
 				if (contadorRastro == rastros.length) {
 					serpente.setAtivo(false);
-					estado = Estado.GANHOU;
+
+					if (Jogo.nivel + 1 == Nivel.niveis.length) {
+						estado = Estado.GANHOU;
+					} else {
+						Jogo.nivel++;
+						estado = Estado.INICIO_ANIMACAO;
+					}
+
 				}
 
 			}
@@ -258,7 +310,25 @@ public class JogoCenario extends CenarioPadrao {
 
 		texto.desenha(g, String.valueOf(rastros.length - contadorRastro), largura - 35, altura);
 
-		if (estado != Estado.JOGANDO) {
+		if (estado == Estado.INICIO_ANIMACAO || estado == Estado.FIM_ANIMACAO) {
+
+			char[][] nivelSelecionado = Nivel.niveis[Jogo.nivel];
+
+			int limite = 0;
+			g.setColor(Color.LIGHT_GRAY);
+
+			for (int linha = 0; linha < nivelSelecionado.length; linha++) {
+				limite++;
+
+				if (limite >= iniAnimacao)
+					break;
+
+				for (int coluna = 0; coluna < nivelSelecionado[0].length; coluna++) {
+					g.fillRect(_LARG * coluna, _LARG * linha, _LARG, _LARG);
+				}
+			}
+
+		} else if (estado == Estado.GANHOU || estado == Estado.PERDEU) {
 
 			if (estado == Estado.GANHOU)
 				texto.desenha(g, "Ganhou!", 180, 180);
@@ -269,5 +339,4 @@ public class JogoCenario extends CenarioPadrao {
 		if (Jogo.pausado)
 			Jogo.textoPausa.desenha(g, "PAUSA", largura / 2 - Jogo.textoPausa.getFonte().getSize(), altura / 2);
 	}
-
 }

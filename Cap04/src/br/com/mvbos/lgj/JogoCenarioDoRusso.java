@@ -47,7 +47,7 @@ public class JogoCenarioDoRusso extends CenarioPadrao {
 	public void carregar() {
 		blocoPorTela = (largura / _LARG) * (altura / _LARG) - 1;
 
-		rastros = new Elemento[blocoPorTela + contadorRastro];
+		rastros = new Elemento[blocoPorTela + 1];
 
 		fruta = new Elemento(0, 0, _LARG, _LARG);
 		fruta.setCor(Color.RED);

@@ -133,9 +133,8 @@ public class Jogo extends JFrame {
 
 	private void carregarJogo() {
 		cenario = new InicioCenario(tela.getWidth(), tela.getHeight());
-		// cenario = new JogoCenario(canvas.getWidth(), canvas.getHeight());
-		// cenario = new JogoCenarioDoRusso(canvas.getWidth(),
-		// canvas.getHeight());
+		// cenario = new JogoCenario(tela.getWidth(), tela.getHeight());
+		// cenario = new JogoCenarioDoRusso(tela.getWidth(), tela.getHeight());
 		cenario.carregar();
 	}
 

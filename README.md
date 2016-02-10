@@ -21,4 +21,4 @@ Fontes do livro: A lógica do Jogo - https://www.casadocodigo.com.br/pages/sumar
 
 * **No capítulo 10**, reveremos os desafios deixados para o leitor e, para os desafios onde apenas indicar a solução não é o suficiente, criaremos exemplos práticos.
 
-Saiba mais em: https://logicadojogo.wordpress.com/
+Saiba mais em: https://logicadojogo.wordpress.com/ e http://forum.casadocodigo.com.br/

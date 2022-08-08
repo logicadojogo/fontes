@@ -105,7 +105,7 @@ public class UmJogo extends JFrame {
 		setSize(640, 480);
 		setVisible(true);
 
-		jogador.x = tela.getWidth() / 2 - jogador.x / 2;
+		jogador.x = tela.getWidth() / 2 - jogador.largura / 2;
 		jogador.y = tela.getHeight() - jogador.altura;
 
 		tiro.altura = tela.getHeight() - jogador.altura;
